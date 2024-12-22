@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Spell Download</title>
+    </head>
+    <body>
+        <h1>Spell Download</h1>
+        <script>
+            function detectOS() {
+                var userAgent = window.navigator.userAgent;
+                var platform = window.navigator.platform;
+                var os = 'unknown';
+                var arch = 'unknown';
+
+                // Detect OS
+                if (platform.includes('Win')) {
+                    os = 'Windows';
+                } else if (platform.includes('Mac')) {
+                    os = 'Mac';
+                } else if (platform.includes('Linux')) {
+                    os = 'Linux';
+                }
+
+                // Detect Architecture
+                if (userAgent.includes('WOW64') || userAgent.includes('Win64') || userAgent.includes('x86_64') || userAgent.includes('amd64')) {
+                    arch = 'x86_64';
+                } else if (userAgent.includes('aarch64') || userAgent.includes('arm64')) {
+                    arch = 'arm64';
+                }
+
+                return { os: os, arch: arch };
+            }
+
+            function getDownloadLink() {
+                var system = detectOS();
+                var downloadLink = 'unknown';
+
+                // Commented out Windows download links
+                /*
+                if (system.os === 'Windows' && system.arch === 'x86_64') {
+                    downloadLink = 'AmdWin/spell.exe';
+                } else if (system.os === 'Windows' && system.arch === 'arm64') {
+                    downloadLink = 'ArmWin/spell.exe';
+                }
+                */
+                if (system.os === 'MacOS' && system.arch === 'x86_64') {
+                    downloadLink = 'AmdMac/spell';
+                } else if (system.os === 'MacOS' && system.arch === 'arm64') {
+                    downloadLink = 'ArmMac/spell';
+                } else if (system.os === 'Linux' && system.arch === 'x86_64') {
+                    downloadLink = 'AmdLinux/spell';
+                } else if (system.os === 'Linux' && system.arch === 'arm64') {
+                    downloadLink = 'ArmLinux/spell';
+                }
+
+                return downloadLink;
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var downloadLink = getDownloadLink();
+                var linkElement = document.createElement('a');
+                linkElement.href = downloadLink;
+                linkElement.innerText = 'Download Spell';
+                linkElement.download = downloadLink.split('/').pop();
+
+                if (downloadLink === 'unknown') {
+                    linkElement.innerText = 'Unsupported System';
+                    linkElement.href = '#';
+                    linkElement.removeAttribute('download');
+                }
+
+                document.body.appendChild(linkElement);
+            });
+        </script>
+        <script src="interface.js"></script>
+    </body>
+</html>

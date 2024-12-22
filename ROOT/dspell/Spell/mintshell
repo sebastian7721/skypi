@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+import subprocess
+import sys
+import getpass
+import socket
+import os
+
+def main():
+    while True:
+        # Show an input field for the user to type a command
+        current_directory = os.getcwd().split("/")[-1]
+        hostname = socket.gethostname().removesuffix(".local")
+        command = input(f"{hostname} ** {getpass.getuser()} {current_directory}$ ")
+
+        # Exit the loop if the user types 'exit'
+        if command.strip().lower() == 'exit':
+            print("Exiting...")
+            break
+        
+        # Handle 'cd' command differently
+        if command.startswith('cd '):
+            try:
+                os.chdir(command.split()[1])
+            except Exception as e:
+                print(f"Error changing directory: {e}")
+            continue
+        
+        # Run other commands and print the output
+        try:
+            result = subprocess.run(command.split(), check=True, capture_output=True, text=True)
+            print(result.stdout)
+            if result.stderr:
+                print(result.stderr, file=sys.stderr)
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing command: {e}", file=sys.stderr)
+
+if __name__ == "__main__":
+    main()

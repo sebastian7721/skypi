@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Adventure</title>
+    <style>
+        body {
+            background-color: blue;
+        }
+        .spacing {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div id="stardiverse">
+                    <button onclick="startdiverse()">Start Adventure</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="dashboard">
+                    <p>
+                        We are very smart. This place will show you the dashboard of our spaceship. Each planet has its own dashboard. On the Moon, there are different buttons based on your coordinate.
+                    </p>
+                </div>
+            </td>
+            <td class="spacing">
+                <div id="windshield">
+                    <p>
+                        This is the windshield of our spaceship. You can see the stars and planets from here.
+                    </p>
+                </div>
+            </td>
+            <td class="spacing">
+                <div id="alerts">
+                    <p>
+                        This is where the alerts are.
+                    </p>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div id="move">
+        <button onclick="moveC('forward')">Forward</button>
+        <button onclick="moveC('backward')">Background</button>
+        <button onclick="moveC('left')">Left</button>
+        <button onclick="moveC('right')">Right</button>
+    </div>
+    <div id="coordinate">
+        <p>
+            This is where you are. It will not show until you start your adventure.
+        </p>
+    </div>
+    <script src="stars.js"></script>
+    <script src="/interface.js"></script>
+</body>
+</html>

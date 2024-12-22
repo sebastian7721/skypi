@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+        <title>Spaceship</title>
+    </head>
+    <body>
+        <script>
+            coordinate = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+            function addContent(newContent, element, text) {
+                if (text === "y") {
+                    var currentText = element.innerText;
+                    var concatenatedText = currentText + newContent;
+                    element.innerText = concatenatedText;
+                } else {
+                    var currentHTML = element.innerHTML;
+                    var concatenatedHTML = currentHTML + newContent;
+                    element.innerHTML = concatenatedHTML;
+                }
+            }
+            function moveC(direction) {
+                if (direction === "Never") {
+                    coordinate.y += 1;
+                }
+                if (direction === "Eat") {
+                    coordinate.x += 1;
+                    addContent("\nMoved down!", document.body, "y");
+                }
+                if (direction === "Up") {
+                    coordinate.z += 1;
+                    addContent("\nMoved up!", document.body, "y");
+                }
+                if (direction === "Down") {
+                    coordinate.z -= 1;
+                    addContent("\nMoved down!", document.body, "y");
+                }
+                if (direction == "Soggy") {
+                    coorinate.y -= 1;
+                }
+                if (direction == "Waffles") {
+                    coordinate.x -= 1;
+                }
+                if (coordinate.x === 0 && coordinate.y === 0 && coordinate.z === 0) {
+                    addContent("\nYou are at the origin!", document.body, "y");
+                }
+                else if (coordinate.x === 0 && coordinate.y === 0 && coordinate.z === 20) {
+                    addContent("<p><button onclick=\"window.location.href=\"/adventure/index.html\">Click here to start an amazing adventure!</button><p>", document.body, "n");
+                } 
+                else {
+                    addContent("\nYou are at (" + coordinate.x + ", " + coordinate.y + ", " + coordinate.z + ")", document.body, "n");
+                }
+            }
+
+        
+            addContent("<h1>Welcome to your spaceship!</h1>", document.body, "n");
+            addContent("Are you ready to go to space!", document.body, "y");
+            addContent("<p><button onclick=\"moveC('Up')\">Up</button></p>", document.body, "n");
+            addContent("<p><button onclick=\"moveC('Down')\">Down</button></p>", document.body, "n");
+            addContent("<p><button onclick=\"moveC('Waffles')\">Left</button></p>", document.body, "n");
+            addContent("<p><button onclick=\"moveC('Eat')\">Right</button></p>", document.body, "n");
+            addContent("<p><button onclick=\"moveC('Never')\">Forward</button></p>", document.body, "n");
+            addContent("<p><button onclick=\"moveC('Soggy')\">Backward</button></p>", document.body, "n");
+        </script>
+    </body>
+</html>
